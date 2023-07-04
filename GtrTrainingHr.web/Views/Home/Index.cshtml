@@ -1,0 +1,12 @@
+﻿@model List<Company>
+
+
+<div class="text-center">
+    <h1 class="display-3">Welcome Home</h1>
+    <h3> Select Your Company</h3>
+
+    @foreach(var item in Model)
+    {
+        <a asp-action="SetCompany" asp-controller="Home" asp-route-Comid="@item.Id" class="btn btn-dark"> @item.ComName</a><br/>
+    }
+</div>

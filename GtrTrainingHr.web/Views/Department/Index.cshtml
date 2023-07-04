@@ -1,0 +1,55 @@
+﻿@model IEnumerable<GtrTrainingHr.web.Models.Department>
+
+@{
+    ViewData["Title"] = "Department Create or Update";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="CreateOrEdit">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Company.ComName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DeptName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Company.ComName)
+            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DeptName)
+                </td>
+            <td>
+                    <a asp-action="CreateOrEdit" class="btn btn-primary" asp-route-id="@item.Id">Edit</a> |
+                    <a class="btn btn-danger" onclick="DeleteFormSubmit('@item.Id')">Delete</a>
+                    <form asp-action="Delete" style="display:none" id="DeleteForm_@item.Id">
+                        <input name="id" value="@item.Id" />
+                    </form>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+@section Scripts{
+    <script>
+        function DeleteFormSubmit(Id) {
+            var form = $("#DeleteForm_" + Id);
+
+            var isconfirm = confirm("Are you sure to delete?");
+
+            if (isconfirm) {
+                form.submit();
+            }
+        }</script>
+}
